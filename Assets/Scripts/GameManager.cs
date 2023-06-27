@@ -44,11 +44,6 @@ public class GameManager : MonoBehaviour
             DontDestroyOnLoad(this);
         }
 
-        if(lpc > 3)
-        {
-            lpc = 4;
-            SceneManager.LoadScene("Fin");
-        }
     }
     
     void Start()
