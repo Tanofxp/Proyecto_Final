@@ -4,12 +4,14 @@ using TMPro;
 using UnityCar;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityStandardAssets.Vehicles.Car;
 
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private GameObject startPanel;
     [SerializeField] private GameObject LapTrigger;
     [SerializeField] private GameObject CarControls;
+    [SerializeField] private GameObject AIControls;
     private LapComplete LapComplete;
     private int lpc;
     [SerializeField] private float lp1T;
@@ -131,7 +133,8 @@ public class GameManager : MonoBehaviour
         startPanel.gameObject.SetActive(false);
         GoAudio.Play();
         go = false;
-        CarControls.GetComponent<CarController>().enabled = true;
+        AIControls.GetComponent<CarAIControl>().enabled = true;
+        CarControls.GetComponent<UnityCar.CarController>().enabled = true;
     }
 
 }
