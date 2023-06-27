@@ -130,7 +130,7 @@ public class GameManager : MonoBehaviour
         GoAudio.Play();
         go = false;
         CarControls.GetComponent<CarController>().enabled = true;
-     }
+    }
 
 }
    

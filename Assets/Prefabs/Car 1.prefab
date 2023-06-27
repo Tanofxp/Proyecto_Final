@@ -389,6 +389,8 @@ MonoBehaviour:
   mass: 1200
   coG: {x: 0, y: 0.435, z: -2.5}
   inertiaTensor: {x: 3600, y: 3900, z: 800}
+  textMeshProUGUI: {fileID: 0}
+  carSpeed: 0
 --- !u!114 &6024554618972468961
 MonoBehaviour:
   m_ObjectHideFlags: 0
