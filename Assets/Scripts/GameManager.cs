@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityCar;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -94,7 +95,10 @@ public class GameManager : MonoBehaviour
             lap_3.text = string.Format("{0:00}:{1:00}:{2:00}", minutes, seconds, cents);
         }
         }
-
+        if( lpc > 3)
+        {
+            SceneManager.LoadScene("Fin");
+        }
 
     }
 

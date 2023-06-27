@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/trackl.unity
     guid: 8f682f4412bfad945a7be675b13a35c1
+  - enabled: 1
+    path: Assets/Scenes/Fin.unity
+    guid: 3cd521d4ef7059a46ac5c3c08eb0cd0a
   m_configObjects: {}
