@@ -11,8 +11,9 @@ public class LapComplete : MonoBehaviour
     public int Total_lap;
     public int lpc;
     public TextMeshProUGUI TLP;
-    private void OnTriggerEnter()
+    private void OnTriggerEnter( Collider other)
     {
+        if(other.gameObject.tag == "Player") {
         lpc += 1;
         if (lpc <= Total_lap)
         {
@@ -24,6 +25,7 @@ public class LapComplete : MonoBehaviour
         {
             lpc = 0;
             SceneManager.LoadScene("Fin");
+        }
         }
     }
 }

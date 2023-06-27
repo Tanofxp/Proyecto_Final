@@ -625,7 +625,7 @@ GameObject:
   - component: {fileID: 125512329}
   m_Layer: 0
   m_Name: LapCount
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6082,6 +6082,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.y
       value: -0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 6024554619550165913, guid: e355fd37439343c4fbe85e7ef7bceee3,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 6024554619705662482, guid: e355fd37439343c4fbe85e7ef7bceee3,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 6024554619708720524, guid: e355fd37439343c4fbe85e7ef7bceee3,
         type: 3}
