@@ -24,7 +24,7 @@ namespace UnityCar
         private Rigidbody rB;
         private float vel;
         private float steerAngle = 0.0f;
-        private float carSpeed;
+        public float carSpeed;
 
         private AeroDynamics aeroDynamics;
         private Brakes brakes;

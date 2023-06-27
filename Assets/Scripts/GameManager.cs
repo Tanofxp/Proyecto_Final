@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class Timer : MonoBehaviour
+public class GameManager : MonoBehaviour
 {
     [SerializeField] private GameObject startPanel;
+    [SerializeField] private GameObject LapTrigger;
     [SerializeField] private int Total_lap;
     [SerializeField] private int lpc;
     [SerializeField] private float lp1T;
@@ -19,10 +20,24 @@ public class Timer : MonoBehaviour
     private int minutes, seconds, cents;
     private float start = 3;
 
-    [SerializeField] private bool lap1, lap2, lap3, go; 
+    [SerializeField] private bool lap1, lap2, lap3, go;
+
+    public static GameManager Instance;
+
+    private void Awake()
+    {
 
 
-
+        if (Instance != null)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            Instance = this;
+            DontDestroyOnLoad(this);
+        }
+    }
 
     // Update is called once per frame
     void Update()
@@ -87,23 +102,23 @@ public class Timer : MonoBehaviour
         ST.SetText(start.ToString("f0"));
         if (start < 0) {
             startPanel.gameObject.SetActive(false);
-            
             go = false;
         }
     }
-
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("te toque");
-        TLP.SetText(lpc + " / " + Total_lap);
         lpc += 1;
+        if (lpc <= Total_lap)
+        {
+            TLP.SetText(lpc + " / " + Total_lap);
+        }
+        LapTrigger.SetActive(false);
+
     }
     private void OnTriggerExit(Collider other)
     {
         Debug.Log("salir");
     }
-
-
 
 }
    
