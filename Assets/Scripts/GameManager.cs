@@ -1,14 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityCar;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private GameObject startPanel;
     [SerializeField] private GameObject LapTrigger;
-    [SerializeField] private int Total_lap;
-    [SerializeField] private int lpc;
+    [SerializeField] private GameObject CarControls;
+    private LapComplete LapComplete;
+    private int lpc;
     [SerializeField] private float lp1T;
     [SerializeField] private float lp2T;
     [SerializeField] private float lp3T;
@@ -18,7 +20,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI ST;
     [SerializeField] private TextMeshProUGUI TLP;
     private int minutes, seconds, cents;
-    private float start = 3;
+    public AudioSource GetReady;
+    public AudioSource GoAudio;
 
     [SerializeField] private bool lap1, lap2, lap3, go;
 
@@ -26,7 +29,7 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-
+        LapComplete = LapTrigger.GetComponent<LapComplete>();
 
         if (Instance != null)
         {
@@ -38,14 +41,20 @@ public class GameManager : MonoBehaviour
             DontDestroyOnLoad(this);
         }
     }
+    
+    void Start()
+    {
+        if (go == true)
+        {
+            StartCoroutine(CountStart());
+        }
+    }
 
-    // Update is called once per frame
     void Update()
     {
+        TLP = LapComplete.TLP;
+        lpc = LapComplete.lpc;
         Debug.Log(lpc);
-        if (go == true) { 
-        StartTime();
-        }
         if(lpc == 1)
         {
             lap2 = false;
@@ -55,7 +64,7 @@ public class GameManager : MonoBehaviour
 
             lp1T += Time.deltaTime;
             Cronometro(lp1T);
-        lap_1.text = string.Format("{0:00}:{1:00}:{2:00}", minutes, seconds, cents);
+            lap_1.text = string.Format("{0:00}:{1:00}:{2:00}", minutes, seconds, cents);
 
         }
         }
@@ -96,29 +105,28 @@ public class GameManager : MonoBehaviour
         cents = (int)((a - (int)a) * 100f);
     }
 
-    public void StartTime()
+    IEnumerator CountStart()
     {
-        start -= Time.deltaTime;
-        ST.SetText(start.ToString("f0"));
-        if (start < 0) {
-            startPanel.gameObject.SetActive(false);
-            go = false;
-        }
-    }
-    private void OnTriggerEnter(Collider other)
-    {
-        lpc += 1;
-        if (lpc <= Total_lap)
-        {
-            TLP.SetText(lpc + " / " + Total_lap);
-        }
-        LapTrigger.SetActive(false);
-
-    }
-    private void OnTriggerExit(Collider other)
-    {
-        Debug.Log("salir");
-    }
+        yield return new WaitForSeconds(0.5f);
+        ST.SetText("3");
+        GetReady.Play();
+        startPanel.gameObject.SetActive(true);
+        yield return new WaitForSeconds(1);
+        startPanel.gameObject.SetActive(false);
+        ST.SetText("2");
+        GetReady.Play();
+        startPanel.gameObject.SetActive(true);
+        yield return new WaitForSeconds(1);
+        startPanel.gameObject.SetActive(false);
+        ST.SetText("1");
+        GetReady.Play();
+        startPanel.gameObject.SetActive(true);
+        yield return new WaitForSeconds(1);
+        startPanel.gameObject.SetActive(false);
+        GoAudio.Play();
+        go = false;
+        CarControls.GetComponent<CarController>().enabled = true;
+     }
 
 }
    
