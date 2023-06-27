@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+using UnityCar;
 using UnityEngine;
 using static UnityEditor.Experimental.GraphView.GraphView;
 
@@ -8,6 +10,14 @@ public class RaycastShooter : MonoBehaviour
     [SerializeField] private Transform m_reycastPoint;
     [SerializeField] private float m_maxDistance;
     [SerializeField] private LayerMask m_raycastLayer;
+    [SerializeField] private GameObject car;
+    private CarController carController;
+
+    void Awake()
+    {
+        carController = car.GetComponent<CarController>();
+    }
+
     void Update()
     {
 
@@ -22,11 +32,11 @@ public class RaycastShooter : MonoBehaviour
         {
             if (l_hit.collider.name == "Tierra")
             {
-                Debug.Log($"Estoy sobre Tierra -1 speed");
+                carController.GetRB.velocity *= 0.9999f;
             }
             if (l_hit.collider.name == "Asfalto")
             {
-                Debug.Log($"Estoy sobre Asfalto +1 speed");
+                carController.GetRB.velocity *= 1.0f;
             }
         }
 
