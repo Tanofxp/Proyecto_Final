@@ -41,6 +41,12 @@ public class GameManager : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(this);
         }
+
+        if(lpc > 3)
+        {
+            lpc = 4;
+            SceneManager.LoadScene("Fin");
+        }
     }
     
     void Start()
@@ -94,10 +100,6 @@ public class GameManager : MonoBehaviour
             Cronometro(lp3T);
             lap_3.text = string.Format("{0:00}:{1:00}:{2:00}", minutes, seconds, cents);
         }
-        }
-        if( lpc > 3)
-        {
-            SceneManager.LoadScene("Fin");
         }
 
     }
